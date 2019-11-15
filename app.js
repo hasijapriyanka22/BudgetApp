@@ -8,7 +8,7 @@
 // //      }
 // //     this.one = function (){
 // //        // console.log(this);
-        
+
 // //         innerFunction();
 // //     }
 // //     Object.defineProperty( this, 'a', {
@@ -89,7 +89,7 @@
 // //     return friends.map( (el) => {
 // //             return `${this.name} my name is ${el}`;
 // //     });
-    
+
 // // }
 
 // // var obj = new Person('priyanka').fxn(['kl', 'jk', 'j']);
@@ -191,17 +191,72 @@
 // //var a=10;
 // console.log(a);
 
-let BudgetController = (function() {
-    var x =10;
-    function add(a){
-        console.log(x+a);
+// let BudgetController = (() => {
+//     var x =10;
+//     function add(a){
+//         console.log(x+a);
+//     }
+//     return {
+//         publicTest : function(a){
+//             console.log(x);
+//             add(a);
+//         }
+//     };
+// })();
+
+// let abc = (()=>{
+//     console.log('hi');
+// })();
+
+// function getRecipes(){
+//     setTimeout(()=>{
+//         const recipeIDs= [90,78,67];
+//         console.log(recipeIDs);
+//         setTimeout((id)=>{
+//             console.log(id);
+//             const details={title : 'pasta '};
+//             setTimeout((publisher)=>{
+
+//             })
+//         },1000,recipeIDs[0])
+//     },1500)
+// };
+//getRecipes();   
+
+var getIDs = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve([100, 101, 102]);
+    }, 1000)
+})
+
+var getRecipes = getID => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(getID);
+        }, 1000, getID);
+    });
+}
+
+// getIDs.then((id) => {
+//     console.log(id);
+//     return getRecipes(id[0]);
+// })
+//     .then((recpieId) => {
+//         console.log(recpieId);
+//     })
+//     .catch((result) => {
+//         console.log(result);
+//     });
+
+async function gettingIDs(){
+    const IDs = await getIDs;
+    console.log(IDs);
+    async function gettingRecipes(){
+        const recipe = await getRecipes(IDs[0]);
+        console.log(recipe);
     }
-    return {
-        publicTest : function(a){
-            console.log(x);
-            add(a);
-        }
-    };
-})();
+    gettingRecipes();
+}
+
 
 
